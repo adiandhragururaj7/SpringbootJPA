@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Primary;
 @Entity
 @Table(name="student")
 public class Student {
+  public int getId() {
+    return id;
+  }
+
   @Id
   @GeneratedValue(strategy =GenerationType.IDENTITY)
   @Column(name="id")
@@ -18,10 +22,10 @@ public class Student {
     this.lastName = lastName;
     this.email = email;
   }
-    @Column(name="first_name")
+    @Column(name="firstname")
       private String firstName;
 
-      @Column(name="last_name")
+      @Column(name="lastname")
       private String lastName;
 
       @Column(name="email")
@@ -36,4 +40,7 @@ public class Student {
               ", email='" + email + '\'' +
               '}';
   }
+
+
+
 }

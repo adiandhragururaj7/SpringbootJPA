@@ -1,5 +1,7 @@
 package com.example.hibernatejpa;
 
+import com.example.hibernatejpa.DAO.StudentDAO;
+import com.example.hibernatejpa.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,10 +14,21 @@ public class HibernateJpaApplication {
         SpringApplication.run(HibernateJpaApplication.class, args);
     }
     @Bean
-    public CommandLineRunner commandLineRunner(String[] args){
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
         return runner ->{
-            System.out.println("success");
+            createStudent(studentDAO);
         };
+    }
+   private void createStudent(StudentDAO studentDAO){
+        System.out.println("creating the new Student object");
+        Student tempStudent = new Student("Gururaj","Adiandhra",
+                "adiandhragururaj7@gmail.com");
+        System.out.println("Saving the student object");
+        studentDAO.save(tempStudent);
+
+        System.out.println("generated id of student" + tempStudent.getId());
+        Student myStudent = studentDAO.findById(tempStudent.getId());
+        System.out.println(myStudent+" retrieved data");
     }
 
 }
